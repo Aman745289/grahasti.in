@@ -13,15 +13,15 @@ const Header = () => {
                 
                 </Link>
                 {/* navbar */}
-                <div>
+                <div className='flex items-center gap-x-4'>
                     {/* Desktop */}
                     <Navbar/>
                     {/* Mobile */}
-                    <Navbar/>
+                    {/* navbar */}
                 </div>
                 {/* buttons */}
                 <div>
-                    buttons and icons
+                    buttons & icons
                 </div>
             </div>
         </div>
