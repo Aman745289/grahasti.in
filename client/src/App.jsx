@@ -1,10 +1,26 @@
 import React from 'react'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import Home from './pages/Home'
+import Addproperty from './pages/Addproperty'
+import Listing from './pages/Listing'
+import Bookings from './pages/Bookings'
+import Favourites from './pages/Favourites'
+import Header from './components/Header'
+import Footer from './components/Footer'  
 
 const App = () => {
   return (
-    <div>
-       <h1 className="text-3x1 font-bold underline">hello</h1>
-    </div>
+    <BrowserRouter>
+    <Header/>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/listing" element={<Listing/>}/>
+        <Route path="addproperty" element={<Addproperty/>}/>
+        <Route path="bookings" element={<Bookings/>}/>
+        <Route path="favourites" element={<Favourites/>}/>
+      </Routes>
+      <Footer/>
+    </BrowserRouter>
   )
 }
 
