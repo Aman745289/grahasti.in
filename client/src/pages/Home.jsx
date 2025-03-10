@@ -1,8 +1,11 @@
 import React from 'react'
+import Hero from '../components/Hero'
 
 const Home = () => {
   return (
-    <div className='flex items-center justify-center h-[999px]'>Home</div>
+    <main>
+      <Hero/>
+    </main>
   )
 }
 
