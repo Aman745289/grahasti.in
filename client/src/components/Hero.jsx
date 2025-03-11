@@ -10,7 +10,7 @@ const Hero = () => {
         <div className='relative top-32 xs:top-52'>
             <span className='text-lg font-medium'>Welcome to Grahasti.in </span>
             <h1 className='text-4xl font-bold capitalize max-w-[40rem]'>Discover Exceptional Homes with Casacentral</h1>
-            <p className='my-10 max-w-[33rem]'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non rerum dolorum cumque magni rem illo quia, 
+            <p className='my-10 max-w-[33rem] py-5 text-gray-600'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non rerum dolorum cumque magni rem illo quia, 
             autem porro excepturi, quidem commodi ad perferendis culpa.
             </p>
             {/* button */}
