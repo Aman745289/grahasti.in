@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { MdClose, MdMenu } from "react-icons/md";
@@ -8,7 +8,7 @@ const Header = () => {
   const [active, setActive] = useState(false);
   const [menuOpened, setMenuOpened] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
 
   const toggleMenu = () => setMenuOpened(!menuOpened);
 
@@ -16,16 +16,10 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Show header if scrolling up, hide if scrolling down
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-      // Update last scroll position
-      setLastScrollY(currentScrollY);
+      // Show header when scrolling up, hide when scrolling down
+      setIsVisible(currentScrollY < lastScrollY.current || currentScrollY < 50);
       setActive(currentScrollY > 40);
+      lastScrollY.current = currentScrollY;
 
       // Close menu if scrolling
       if (menuOpened) {
@@ -34,9 +28,8 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, menuOpened]);
+  }, [menuOpened]);
 
   return (
     <header
@@ -46,25 +39,23 @@ const Header = () => {
     >
       {/* Container */}
       <div
-        className={`${
+        className={`bg-white transition-all duration-200 rounded-full px-5 ring-1 ring-slate-900/5 ${
           active ? "py-0" : "py-1"
-        } max-padd-container bg-white transition-all duration-200 rounded-full px-5 ring-1 ring-slate-900/5`}
+        }`}
       >
         <div className="flex justify-between py-3">
           {/* Logo */}
-          <Link to={"/"}>
-            <span className="font-[900] text-[24px]">
-              Grahasti<span className="font-[600] medium-20">.in</span>
+          <Link to="/">
+            <span className="font-extrabold text-2xl">
+              Grahasti<span className="font-semibold text-lg">.in</span>
             </span>
           </Link>
 
           {/* Navbar */}
           <div className="flex items-center gap-x-4">
             <Navbar
-              containerStyles={`${
-                menuOpened
-                  ? "flex items-start flex-col gap-y-8 capitalize fixed top-20 right-8 p-12 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300 z-50"
-                  : "flex items-start flex-col gap-y-8 capitalize fixed top-20 -right-[100%] p-12 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300"
+              containerStyles={`fixed top-20 p-12 bg-white rounded-3xl shadow-md w-64 medium-16 ring-1 ring-slate-900/5 transition-all duration-300 ${
+                menuOpened ? "right-8 z-50" : "-right-[100%]"
               }`}
             />
           </div>
